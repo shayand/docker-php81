@@ -1,2 +1,5 @@
 .env
 var/*
+wp-config.php
+wp-content/files
+docker/nginx/config
