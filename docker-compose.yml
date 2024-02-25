@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:${MYSQL_VERSION:-8.0.22}
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-very_secret}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-wordpress}
+      MYSQL_USER: ${MYSQL_USER:-db_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
+    restart: unless-stopped
+    networks:
+      - shared_network
+    volumes:
+      - db_data:/var/lib/mysql
+  
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+    ports:
+      - "${PHP_PORT:-9000}:9000"
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www:cached
+      - ./var/log:/var/www/var/log:cached
+    networks:
+      - shared_network
+    depends_on:
+      - database
+
+  nginx:
+    build:
+      context: ./docker/nginx
+      args:
+        NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-NGINX}
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    depends_on:
+      - php-fpm
+    restart: unless-stopped
+    networks:
+      - shared_network
+    volumes:
+      - ./var/log/nginx:/var/log/nginx:cached
+      - ./:/var/www:cached
+      - ./docker/nginx/config:/etc/nginx/conf.d
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  shared_network:
+    driver: bridge

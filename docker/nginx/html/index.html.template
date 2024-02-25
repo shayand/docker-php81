@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Docker PHP 8.1</title>
+    </head>
+<body>
+    <h1>
+        <a href="https://github.com/shayand/docker-php81-wordpress" target="_blank">Docker PHP</a>
+    </h1>
+    <p>
+        A complete stack for running wodpress (latest version), PHP81 using docker-compose tool.<br>
+    </p>
+    <p>
+        <b>Note</b><br>
+        Remember to add <code>${NGINX_SERVER_NAME}</code> in your <code>/etc/hosts</code> file.<br>
+    </p>
+    <h2>Index</h2>
+    <ul>
+        <li><a href="http://${NGINX_SERVER_NAME}" target="_blank">Symfony</a></li>
+    </ul>
+</body>
+</html>
