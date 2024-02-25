@@ -4,9 +4,9 @@ This is a docker compose project for developing code with PHP 8 and mysql 10.4
 
 ## Summary
 This package is built for development of PHP 8.1 project. We also try to gather things and containers that
-used to  implement **CQRS** architectures
+used to  implement **PHP 8.1** for open-source project
 
-* Main Goal: **`A flexible tool for building PHP 8.1 project with hands on CQRS `**
+* Main Goal: **`A flexible tool for building PHP 8.1 project `**
 * Includes:
     * `PHP 8.1` PHP FPM
     * `NGINX` latest veriosn of alpine nginx
