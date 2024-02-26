@@ -13,7 +13,17 @@ RUN apk add --no-cache \
     zlib \
     make \
     curl \
-    vim
+    vim \
+    bash \
+    build-base \
+    gcc \
+    wget \ 
+    git \
+    autoconf \
+    libmcrypt-dev \ 
+    g++ \
+    make \
+    openssl-dev
 
 RUN apk add --no-cache \
     php81-fpm \
@@ -39,6 +49,8 @@ RUN apk add --no-cache \
     php81-zip \
     php81-xmlwriter \
     php81-sodium 
+
+RUN docker-php-ext-install mysqli
 
 COPY php.ini /etc/php81/conf.d/
 COPY php.ini /etc/php81/cli/conf.d/
